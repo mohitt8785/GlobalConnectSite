@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   ArrowUpRight,
-  Check,
   CheckCircle2,
   ChevronRight,
-  Copy,
   Globe2,
   Mail,
   MapPin,
@@ -16,6 +15,12 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { company, services } from '../data/site';
+
+// Vite exposes only variables prefixed with VITE_ in the browser bundle.
+// Use the public EmailJS key only; never put private keys in frontend code.
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID?.trim();
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID?.trim();
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY?.trim();
 
 const startingForm = {
   name: '',
@@ -32,51 +37,75 @@ const highlights = [
 
 export default function Contact() {
   const [form, setForm] = useState(startingForm);
-  const [preparedMessage, setPreparedMessage] = useState('');
-  const [copied, setCopied] = useState(false);
-  const [copyError, setCopyError] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [result, setResult] = useState(null);
+  const submitting = useRef(false);
 
   const email = company.email || 'globalconnectconsultancy01@gmail.com';
 
   function update(event) {
     const { name, value } = event.target;
     setForm((previous) => ({ ...previous, [name]: value }));
-    setPreparedMessage('');
-    setCopied(false);
-    setCopyError(false);
+    setResult(null);
   }
 
-  function submit(event) {
+  async function submit(event) {
     event.preventDefault();
-    const subject = `New ${form.service} enquiry - ${form.name.trim()}`;
-    const message = [
-      `Hello ${company.name},`,
-      '',
-      `Name: ${form.name.trim()}`,
-      `Email: ${form.email.trim()}`,
-      `Interested Service: ${form.service}`,
-      '',
-      'Message:',
-      form.message.trim(),
-    ].join('\n');
+    if (submitting.current) return;
 
-    setPreparedMessage(message);
-    setCopied(false);
-    setCopyError(false);
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setResult({
+        type: 'error',
+        text: `Online enquiries are not configured yet. Please email us at ${email}.`,
+      });
+      return;
+    }
 
-    // Static-site form: prepares an email in the visitor's email application.
-    // The visitor must press Send themselves; nothing is stored on a server.
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-  }
+    const name = form.name.trim();
+    const visitorEmail = form.email.trim();
+    const message = form.message.trim();
+    if (!name || !visitorEmail || !message) {
+      setResult({ type: 'error', text: 'Please complete all required fields before submitting.' });
+      return;
+    }
 
-  async function copyMessage() {
+    submitting.current = true;
+    setSending(true);
+    setResult(null);
+
     try {
-      await navigator.clipboard.writeText(preparedMessage);
-      setCopied(true);
-      setCopyError(false);
-    } catch {
-      setCopyError(true);
-      setCopied(false);
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          title: `New ${form.service} enquiry`,
+          name,
+          email: visitorEmail,
+          reply_to: visitorEmail,
+          service: form.service,
+          message,
+          time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        },
+        {
+          publicKey: EMAILJS_PUBLIC_KEY,
+          limitRate: { id: 'global-connect-contact', throttle: 10000 },
+        },
+      );
+
+      setResult({
+        type: 'success',
+        text: 'Your enquiry was sent successfully. Our team will get back to you by email.',
+      });
+      setForm({ ...startingForm });
+    } catch (error) {
+      console.error('EmailJS send failed:', error);
+      setResult({
+        type: 'error',
+        text: `We could not send your enquiry. Please try again or email us directly at ${email}.`,
+      });
+    } finally {
+      submitting.current = false;
+      setSending(false);
     }
   }
 
@@ -134,7 +163,7 @@ export default function Contact() {
               Let's talk about <span className="text-[#14a66c]">your next move.</span>
             </h2>
             <p className="mt-5 max-w-lg text-base leading-8 text-slate-600">
-              We're happy to hear about your study, family, travel, or business plans. Reach us by email or prepare your enquiry using the form.
+              We're happy to hear about your study, family, travel, or business plans. Reach us by email or send your enquiry directly using the form.
             </p>
 
             <a
@@ -177,7 +206,7 @@ export default function Contact() {
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#e8f9f0] text-[#11935e]"><Send size={23} /></span>
               <div>
                 <h2 className="font-display text-2xl font-extrabold text-[#092039] sm:text-[29px]">Send us an enquiry</h2>
-                <p className="mt-2 text-sm leading-6 text-slate-500">Fill in your details to open a ready-to-send email draft.</p>
+                <p className="mt-2 text-sm leading-6 text-slate-500">Fill in your details and send your enquiry directly to our team.</p>
               </div>
             </div>
 
@@ -185,11 +214,11 @@ export default function Contact() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="field-label">
                   Full name <span className="text-red-500">*</span>
-                  <input name="name" value={form.name} onChange={update} required autoComplete="name" placeholder="Enter your full name" className="field-input !mt-2 !rounded-2xl !bg-[#f8fafc]" />
+                  <input name="name" value={form.name} onChange={update} required minLength={2} maxLength={100} autoComplete="name" placeholder="Enter your full name" className="field-input !mt-2 !rounded-2xl !bg-[#f8fafc]" />
                 </label>
                 <label className="field-label">
                   Email address <span className="text-red-500">*</span>
-                  <input name="email" type="email" value={form.email} onChange={update} required autoComplete="email" placeholder="you@example.com" className="field-input !mt-2 !rounded-2xl !bg-[#f8fafc]" />
+                  <input name="email" type="email" value={form.email} onChange={update} required maxLength={254} autoComplete="email" placeholder="you@example.com" className="field-input !mt-2 !rounded-2xl !bg-[#f8fafc]" />
                 </label>
               </div>
 
@@ -205,31 +234,30 @@ export default function Contact() {
                 <textarea name="message" value={form.message} onChange={update} required rows={5} maxLength={1500} placeholder="Tell us about your preferred destination, plans, or questions..." className="field-input !mt-2 resize-y !rounded-2xl !bg-[#f8fafc]" />
               </label>
 
-              <button type="submit" className="btn-primary w-full !justify-center !py-4">
-                Open Email Draft <ArrowUpRight size={19} />
+              <button
+                type="submit"
+                disabled={sending}
+                className="btn-primary w-full !justify-center !py-4 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {sending ? 'Sending enquiry...' : 'Send Enquiry'}
+                <ArrowUpRight size={19} />
               </button>
               <p className="text-center text-xs leading-6 text-slate-500">
-                This website doesn't store form details. Your email app will open so you can review and send your message.
+                By submitting, you agree to share these details with our team so we can respond to your enquiry.
               </p>
-            </form>
-
-            {preparedMessage && (
-              <div className="mt-7 rounded-[20px] border border-green-200 bg-green-50 p-5" role="status">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-1 shrink-0 text-[#11935e]" size={19} />
-                  <div>
-                    <h3 className="font-display text-sm font-extrabold text-[#075b3c]">Your enquiry draft is ready</h3>
-                    <p className="mt-2 text-xs leading-6 text-slate-600">If your email app did not open, copy this message and email it to {email}.</p>
+              {result && (
+                <div
+                  role={result.type === 'error' ? 'alert' : 'status'}
+                  aria-live="polite"
+                  className={`rounded-2xl border p-4 text-sm leading-6 ${result.type === 'success' ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-700'}`}
+                >
+                  <div className="flex items-start gap-3">
+                    {result.type === 'success' ? <CheckCircle2 size={20} className="mt-0.5 shrink-0" /> : <Mail size={20} className="mt-0.5 shrink-0" />}
+                    <p>{result.text}</p>
                   </div>
                 </div>
-                <pre className="mt-4 max-h-48 overflow-y-auto whitespace-pre-wrap break-words rounded-xl bg-white p-4 font-sans text-xs leading-6 text-slate-700">{preparedMessage}</pre>
-                <button type="button" onClick={copyMessage} className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#071d35] px-4 py-3 text-xs font-extrabold text-white hover:bg-[#103e63]">
-                  {copied ? <Check size={16} /> : <Copy size={16} />}
-                  {copied ? 'Message copied' : 'Copy message'}
-                </button>
-                {copyError && <p className="mt-2 text-xs text-red-600">Copy was blocked by your browser. Please select the text and copy it manually.</p>}
-              </div>
-            )}
+              )}
+            </form>
           </div>
         </div>
       </section>

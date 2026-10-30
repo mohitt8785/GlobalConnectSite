@@ -15,12 +15,12 @@ export const company = {
 
 export const services = [
   {
-    slug: "study-visa",
-    title: "Study Visa",
-    icon: GraduationCap,
+     slug: "study-visa",
+  title: "Study Visa",
+  icon: GraduationCap,
     label: "Education abroad",
     description:
-      "Explore international education options with guidance on course selection, applications and visa documents.",
+      "Explore international education opportunities, choose the right course and get guidance with university applications and student visa documentation.",
     intro:
       "The right study journey starts with a thoughtful plan. From choosing a course to organizing your documents, get guidance at every stage.",
     points: [
@@ -43,7 +43,7 @@ export const services = [
     icon: UsersRound,
     label: "Reunite with loved ones",
     description:
-      "Understand family visa pathways, documentation and the application journey for eligible relatives.",
+      "Get guidance on family visa options, eligibility requirements and documentation to help you plan your journey to reunite with loved ones.",
     intro:
       "Being close to your loved ones matters. We help you understand available family visa categories and organize the supporting paperwork.",
     points: [
@@ -66,7 +66,7 @@ export const services = [
     icon: Plane,
     label: "Travel with confidence",
     description:
-      "Prepare for short trips, holidays and family visits with clear travel visa application guidance.",
+      "Planning a holiday or visiting loved ones? Get support with tourist visa requirements, application documents and travel preparation.",
     intro:
       "Make travel planning easier with support on required documents and application steps for your intended destination.",
     points: [
@@ -89,7 +89,7 @@ export const services = [
     icon: BriefcaseBusiness,
     label: "International opportunities",
     description:
-      "Plan business travel with guidance for meetings, events, professional visits and application paperwork.",
+      "Explore international business opportunities with guidance on business visa applications, documentation, meetings and professional travel.",
     intro:
       "For international meetings and business visits, well-prepared documents help you approach the process with confidence.",
     points: [
@@ -109,30 +109,30 @@ export const services = [
 ];
 
 export const destinations = [
-  { name: "Canada", flag: "🇨🇦", subtitle: "Study and explore" },
-  { name: "Australia", flag: "🇦🇺", subtitle: "New experiences" },
-  { name: "United States", flag: "🇺🇸", subtitle: "Global opportunities" },
-  { name: "Germany", flag: "🇩🇪", subtitle: "Explore your options" },
-  { name: "Poland", flag: "🇵🇱", subtitle: "Discover new paths" },
-  { name: "Malta", flag: "🇲🇹", subtitle: "Plan your journey" },
+  { name: "Canada", flag: "https://flagcdn.com/ca.svg", subtitle: "Study and explore" },
+  { name: "Australia", flag: "https://flagcdn.com/au.svg", subtitle: "New experiences" },
+  { name: "United States", flag: "https://flagcdn.com/us.svg", subtitle: "Global opportunities" },
+  { name: "Germany", flag: "https://flagcdn.com/de.svg", subtitle: "Explore your options" },
+  { name: "Poland", flag: "https://flagcdn.com/pl.svg", subtitle: "Discover new paths" },
+  { name: "Malta", flag: "https://flagcdn.com/mt.svg", subtitle: "Plan your journey" },
 ];
 
 export const faqs = [
   {
-    q: "Which visa services do you offer?",
-    a: "We provide guidance for Study, Family, Tourist and Business Visa applications. The requirements depend on the destination and your circumstances.",
+    q: "What services does Global Connect Consultancy offer?",
+    a: "Global Connect Consultancy provides guidance for Study Visas, Tourist Visas, Family Visas and Business Visas to help individuals plan their international journeys.",
   },
   {
-    q: "How do I get started?",
-    a: "Contact our team with your preferred destination, travel purpose and background. We can help explain the next steps and relevant documentation.",
+    q: "How can I apply for a visa?",
+    a: "You can contact our consultancy to discuss your travel goals. Our team will guide you through the visa requirements, documentation and application process.",
   },
   {
-    q: "Do you help with university applications?",
-    a: "Our study visa guidance includes support with exploring courses, universities or colleges, and preparing application documents.",
+    q: "What documents are required for a visa application?",
+    a: "Documents vary depending on the visa type and destination. Generally, applicants may need a valid passport, photographs, financial documents and supporting paperwork.",
   },
   {
-    q: "Is visa approval guaranteed?",
-    a: "No. All applications are assessed by the relevant visa authorities. We focus on accurate guidance and organized documentation.",
+    q: " How long does the visa application process take?Is visa approval guaranteed?",
+    a: "Visa processing times depend on the destination country, visa category and individual application. We help you understand the expected timelines and requirements.",
   },
 ];
 

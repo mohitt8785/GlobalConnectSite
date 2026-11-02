@@ -10,6 +10,7 @@ const mainLinks = [
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
   { label: 'Contact', to: '/contact' },
+  { label: 'Blog', to: '/blog' },
 ];
 
 export default function Navbar() {

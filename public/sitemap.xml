@@ -1,11 +1,48 @@
+
+
+
+
+
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://globalconnectconsultancy.in/</loc></url>
-  <url><loc>https://globalconnectconsultancy.in/about</loc></url>
-  <url><loc>https://globalconnectconsultancy.in/blog</loc></url>
-  <url><loc>https://globalconnectconsultancy.in/contact</loc></url>
-  <url><loc>https://globalconnectconsultancy.in/services/study-visa</loc></url>
-  <url><loc>https://globalconnectconsultancy.in/services/family-visa</loc></url>
-  <url><loc>https://globalconnectconsultancy.in/services/tourist-visa</loc></url>
-  <url><loc>https://globalconnectconsultancy.in/services/business-visa</loc></url>
+
+  <url>
+    <loc>https://globalconnectconsultancy.in/</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/about</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/services</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/services/study-visa</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/services/tourist-visa</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/services/family-visa</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/services/business-visa</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/blog</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/blog/study-abroad-planning-checklist</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/blog/organizing-visa-documents</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/blog/questions-for-visa-consultation</loc>
+  </url>
+  <url>
+    <loc>https://globalconnectconsultancy.in/contact</loc>
+  </url>
+
 </urlset>
+

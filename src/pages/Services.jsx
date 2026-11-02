@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check, Globe2, ShieldCheck, Sparkles } from 'lucide-react';
-import { services } from '../data/site';
+// import { services } from '../data/site';
+import {  faqs, services } from '../data/site';
 
 const benefits = [
   { icon: ShieldCheck, title: 'Trusted guidance', description: 'Clear and reliable guidance throughout your application journey.' },
@@ -27,11 +28,11 @@ export default function Services() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_.9fr]">
           <div>
             <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              Explore our
-              <span className="mt-2 block text-[#45d49a]">professional services.</span>
+              Find the Right
+              <span className="mt-2 block text-[#45d49a]">Visa Path for Your Journey.</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
-              Discover the right opportunities with personalised guidance, reliable support and a clear approach at every step.
+              Explore visa and immigration services designed around your goals. Get personalised guidance, application support and clear assistance from the first step to the next.
             </p>
             <Link
               to="/contact"
@@ -160,8 +161,71 @@ export default function Services() {
         </div>
       </section>
 
+      <section className="py-20 md:py-24 bg-[#f5f8f7]">
+        <div className="max-w-7xl mx-auto px-5">
+      
+          {/* FAQ Heading */}
+          <div className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#102b46]">
+              FAQ
+            </h2>
+            <div className="w-16 h-1 bg-[#159b75] mx-auto mt-4 rounded-full"></div>
+          </div>
+      
+          {/* FAQ List */}
+          <div className="max-w-4xl mx-auto flex flex-col gap-4">
+            {faqs.map(({ q, a }, index) => (
+              <details
+                key={q}
+                className="group bg-white border border-[#e1eae6] rounded-xl overflow-hidden shadow-sm hover:border-[#159b75] hover:shadow-md transition-all duration-300"
+                open={index === 0}
+              >
+                <summary className="flex items-center gap-4 p-5 md:p-6 cursor-pointer list-none">
+      
+                  <span className="text-sm font-bold text-[#159b75]">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+      
+                  <span className="flex-1 text-[#102b46] font-semibold text-sm md:text-base">
+                    {q}
+                  </span>
+      
+                  <span className="w-8 h-8 shrink-0 flex items-center justify-center rounded-full bg-[#edf7f3] text-[#159b75] text-xl transition-all duration-300 group-open:bg-[#159b75] group-open:text-white group-open:rotate-45">
+                    +
+                  </span>
+      
+                </summary>
+      
+                <div className="px-5 md:px-14 pb-6">
+                  <p className="text-[#687985] text-sm md:text-base leading-7">
+                    {a}
+                  </p>
+                </div>
+      
+              </details>
+            ))}
+          </div>
+      
+          {/* Contact Link */}
+          <div className="text-center mt-10">
+            <p className="text-[#687985] mb-3">
+              Still have questions?
+            </p>
+      
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 text-[#159b75] font-bold hover:gap-4 transition-all duration-300"
+            >
+              Contact Our Team
+              <ArrowUpRight size={18} />
+            </Link>
+          </div>
+      
+        </div>
+      </section>
+
       {/* CTA: horizontal banner */}
-      <section className="bg-[#f3f8fc] px-5 py-16 sm:px-8 lg:py-20">
+      <section className="bg-[#f3f8fc] px-5 py-19 sm:px-8 lg:py-5">
         <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 overflow-hidden rounded-[28px] bg-[#071d35] px-7 py-12 text-white sm:px-12 lg:flex-row lg:items-center">
           <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#159d6b]/20 blur-[90px]" />
           <div className="relative max-w-xl">

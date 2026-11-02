@@ -1,6 +1,5 @@
 
-
-
 User-agent: *
 Allow: /
+
 Sitemap: https://globalconnectconsultancy.in/sitemap.xml

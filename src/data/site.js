@@ -130,10 +130,17 @@ export const faqs = [
     q: "What documents are required for a visa application?",
     a: "Documents vary depending on the visa type and destination. Generally, applicants may need a valid passport, photographs, financial documents and supporting paperwork.",
   },
-  {
-    q: " How long does the visa application process take?Is visa approval guaranteed?",
-    a: "Visa processing times depend on the destination country, visa category and individual application. We help you understand the expected timelines and requirements.",
+    {
+    q: "How long does the visa application process take?",
+    a: "Visa processing times depend on the destination country, visa category and individual application. Check the relevant official immigration website for current processing times.",
   },
+  {
+    q: "Is visa approval guaranteed?",
+    a: "No. Visa approval is decided by the relevant country's immigration authorities. Global Connect Consultancy can provide application guidance, but cannot guarantee visa approval.",
+  },
+
+
+
 ];
 
 // Starter editorial articles; replace with your own approved content before launch.

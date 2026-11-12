@@ -1,8 +1,19 @@
-import { ArrowRight, ArrowUpRight, Globe2, Mail, MapPin } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Globe2,
+  Mail,
+  MapPin,
+  Phone,
+  MessageCircle,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { company, services } from '../data/site';
 
 const FALLBACK_EMAIL = 'globalconnectconsultancy01@gmail.com';
+const phone = company.phone?.trim() || '';
+const whatsapp = phone
+  ? `https://wa.me/${phone.replace(/\D/g, '')}`
+  : '';
 
 export default function Footer() {
   const email = company.email?.trim() || FALLBACK_EMAIL;
@@ -61,7 +72,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Contact: no company phone number is shown */}
+      {/* Contact Details */}
         <div className="min-w-0">
           <h2 className="mb-6 text-[15px] font-extrabold text-white">Get in touch</h2>
           <a
@@ -78,6 +89,27 @@ export default function Footer() {
               {emailDomain && <span className="block text-slate-300">@{emailDomain}</span>}
             </span>
           </a>
+          {phone && (
+            <a
+              href={`tel:${phone}`}
+              className="mt-4 flex items-center gap-3 text-sm text-slate-300 hover:text-[#68e7a8]"
+            >
+              <Phone size={17} className="shrink-0 text-[#68e7a8]" />
+              <span>{phone}</span>
+            </a>
+          )}
+
+          {whatsapp && (
+            <a
+              href={whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center gap-3 text-sm text-slate-300 hover:text-[#68e7a8]"
+            >
+              <MessageCircle size={17} className="shrink-0 text-[#68e7a8]" />
+              <span>Chat on WhatsApp</span>
+            </a>
+          )}
           {company.address && (
             company.map ? (
               <a href={company.map} target="_blank" rel="noopener noreferrer" className="mt-5 flex items-start gap-3 text-sm leading-6 text-slate-300 transition-colors hover:text-[#68e7a8]">

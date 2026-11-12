@@ -5,12 +5,15 @@ import {
   BriefcaseBusiness,
 } from "lucide-react";
 
+
 export const company = {
   name: "Global Connect Consultancy",
   shortName: "Global Connect",
   email: "globalconnectconsultancy01@gmail.com",
-  address: "",
-  map: "",
+  phone: "+916239334229",
+  address:
+    "Saini Tower, 1534, Second Floor, Barwala Road, Derabassi, Near Saini Bhawan, Punjab, India",
+  map: "https://www.google.com/maps/search/?api=1&query=Saini+Tower%2C+1534%2C+Second+Floor%2C+Barwala+Road%2C+Derabassi%2C+Near+Saini+Bhawan%2C+Punjab",
 };
 
 export const services = [
@@ -143,48 +146,7 @@ export const faqs = [
 
 ];
 
-// Starter editorial articles; replace with your own approved content before launch.
-export const posts = [
-  {
-    slug: "study-abroad-planning-checklist",
-    category: "Study Abroad",
-    date: "Guide",
-    title: "A practical checklist before planning to study abroad",
-    excerpt:
-      "Start with your goals, destination research, finances, and a clear document checklist.",
-    body: [
-      "Decide what you want to study and identify countries that match your academic and career goals.",
-      "Check official institution and visa sources for entry conditions, tuition, financial evidence and timelines.",
-      "Keep digital and printed copies of your academic documents, ID and application communications organized.",
-    ],
-  },
-  {
-    slug: "organizing-visa-documents",
-    category: "Visa Tips",
-    date: "Guide",
-    title: "How to organize your visa application documents",
-    excerpt:
-      "Small preparation habits can make an application easier to review and manage.",
-    body: [
-      "Create a destination-specific checklist using official guidance for the relevant visa category.",
-      "Make sure names and dates are consistent across documents and verify any required translations.",
-      "Review official submission instructions before uploading or presenting documents.",
-    ],
-  },
-  {
-    slug: "questions-for-visa-consultation",
-    category: "Consultation",
-    date: "Guide",
-    title: "Questions to ask during your first visa consultation",
-    excerpt:
-      "Know what information to bring and what to clarify in the first conversation.",
-    body: [
-      "Be prepared to discuss your intended travel dates, purpose of travel and relevant background.",
-      "Ask which visa categories may apply, what supporting evidence is required and where to find official requirements.",
-      "Clarify costs, expected steps and the fact that approvals are determined by visa authorities.",
-    ],
-  },
-];
+export const posts = [];
 
 export function whatsappUrl(
   text = "Hello Global Connect Consultancy, I would like to know more about your visa services.",

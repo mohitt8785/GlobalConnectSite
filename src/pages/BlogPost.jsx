@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, CalendarDays, CheckCircle2, ChevronRight, Compass, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, BookOpen, CalendarDays, CheckCircle2, ChevronRight, Compass, ShieldCheck } from 'lucide-react';
 import { posts } from '../data/site';
 import { BlogCover, getBlogReadTime } from './Blog';
 import NotFound from './NotFound';
@@ -9,7 +9,6 @@ export default function BlogPost() {
   const post = posts.find((item) => item.slug === slug);
   if (!post) return <NotFound />;
 
-  const relatedPosts = posts.filter((item) => item.slug !== post.slug).slice(0, 2);
   const paragraphs = Array.isArray(post.body) ? post.body : [];
 
   return (
@@ -85,25 +84,6 @@ export default function BlogPost() {
           </div>
         </div>
       </section>
-
-      {relatedPosts.length > 0 && (
-        <section className="bg-white py-16 sm:py-20">
-          <div className="site-container">
-            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-              <div><span className="eyebrow !text-[#179c6d]">Keep exploring</span><h2 className="font-display mt-3 text-3xl font-extrabold tracking-tight text-[#092039] sm:text-4xl">You may also like</h2></div>
-              <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold text-[#12885d]">View all guides <ArrowRight size={17}/></Link>
-            </div>
-            <div className="grid gap-6 md:grid-cols-2">
-              {relatedPosts.map((item) => (
-                <Link key={item.slug} to={`/blog/${item.slug}`} className="group flex overflow-hidden rounded-[22px] border border-slate-100 bg-[#f8fbfe] transition-all hover:-translate-y-1 hover:shadow-lg">
-                  <BlogCover post={item} className="hidden w-[35%] shrink-0 sm:block" />
-                  <div className="flex-1 p-6 sm:p-7"><p className="text-[11px] font-extrabold uppercase tracking-wider text-[#168b63]">{item.category}</p><h3 className="font-display mt-3 text-lg font-extrabold leading-snug text-[#092039] group-hover:text-[#13835e]">{item.title}</h3><span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#138b60]">Read guide <ArrowUpRight size={16}/></span></div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
     </>
   );
 }

@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { posts, services } from '../data/site';
@@ -20,8 +19,8 @@ const pageMetadata = {
     description: 'Explore professional visa consultancy services for study, tourist, family and business visas with personalised immigration guidance and application support.',
   },
   '/blog': {
-    title: 'Visa & Study Abroad Blog | Global Connect Consultancy',
-    description: 'Read practical guides about study abroad planning, visa documents and international travel preparation.',
+    title: 'Visa Guides & Resources | Global Connect Consultancy',
+    description: 'Visa services, popular destinations and helpful information for study, tourist, family and business visa applications.',
   },
   '/contact': {
     title: 'Contact Us | Global Connect Consultancy',
@@ -61,13 +60,15 @@ export default function SEO() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const path = pathname.replace(/\/$/, '') || '/';
-    
+    // Treat /index.html as the homepage and strip trailing slashes
+    const path =
+      pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+
     let metadata = pageMetadata[path];
 
     if (path.startsWith('/services/')) {
       const slug = path.split('/')[2];
-      const service = services.find(item => item.slug === slug);
+      const service = services.find((item) => item.slug === slug);
 
       if (service) {
         metadata = {
@@ -79,7 +80,7 @@ export default function SEO() {
 
     if (path.startsWith('/blog/')) {
       const slug = path.split('/')[2];
-      const post = posts.find(item => item.slug === slug);
+      const post = posts.find((item) => item.slug === slug);
 
       if (post) {
         metadata = {
@@ -96,7 +97,7 @@ export default function SEO() {
       description: 'The requested page could not be found.',
     };
 
-    const canonical = `${SITE}${path}`;
+    const canonical = path === '/' ? `${SITE}/` : `${SITE}${path}`;
 
     document.title = metadata.title;
 
